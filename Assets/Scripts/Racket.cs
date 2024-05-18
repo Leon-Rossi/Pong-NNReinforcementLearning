@@ -31,6 +31,10 @@ public abstract class Racket : MonoBehaviour
 
     protected abstract void Movement();
 
+    public abstract void NextNN();
+
+    public abstract void HitBall();
+
     public void GetScore(){
         Score++;
         scoreText.text = Score.ToString();

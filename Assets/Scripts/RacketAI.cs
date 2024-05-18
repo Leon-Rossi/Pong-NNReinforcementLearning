@@ -23,4 +23,9 @@ public class RacketAI : Racket
 
     }
 
+    public override void NextNN()
+    {}
+
+    public override void HitBall()
+    {}
 }

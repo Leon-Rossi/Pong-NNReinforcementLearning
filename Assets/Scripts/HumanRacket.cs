@@ -11,4 +11,10 @@ public class HumanRacket : Racket
         float moveAxesValue = Input.GetAxis(AxesName) * moveSpeed;
         rb.velocity = new Vector2(0, moveAxesValue);
     }
+
+    public override void NextNN()
+    {}
+
+    public override void HitBall()
+    {}
 }

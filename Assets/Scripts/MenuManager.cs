@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class MenuManager : MonoBehaviour
 {
-    public void Load(int index)
+    public void Load(string sceneName)
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void Quit()
@@ -19,7 +20,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Load(3);
+            Load("Menu");
         }
     }
 }
