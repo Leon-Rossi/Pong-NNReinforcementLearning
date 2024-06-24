@@ -15,8 +15,9 @@ public class SelectNN : MonoBehaviour
     int speed;
     
     string textOutput;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         aiControl = GameObject.Find("GameMaster").GetComponent<AIControl>();
     }
@@ -54,11 +55,9 @@ public class SelectNN : MonoBehaviour
 
         foreach(AISave save in aiSaves)
         {
-            print(save.saveName);
             textOutput += save.saveName + Environment.NewLine;
         }
 
-        print(textOutput);
         textField.text = textOutput;
         
     }
