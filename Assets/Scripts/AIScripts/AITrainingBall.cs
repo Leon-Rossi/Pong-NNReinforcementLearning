@@ -54,8 +54,8 @@ public class AITrainingBall : MonoBehaviour
 
         if (tag.Equals(Tag.rightWall))
         {
-            RightRacket.NextNN();
             LeftRacket.GetScore();
+            RightRacket.OnHit();
         }
         if (tag.Equals(Tag.leftRacket))
         {
@@ -64,8 +64,7 @@ public class AITrainingBall : MonoBehaviour
         if (tag.Equals(Tag.rightRacket))
         {
             wayBallRight(collision, -1);
-
-            RightRacket.HitBall();
+            RightRacket.OnHit();
         }
     }
 

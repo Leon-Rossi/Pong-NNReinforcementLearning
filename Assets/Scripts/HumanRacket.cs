@@ -12,9 +12,4 @@ public class HumanRacket : Racket
         rb.velocity = new Vector2(0, moveAxesValue);
     }
 
-    public override void NextNN()
-    {}
-
-    public override void HitBall()
-    {}
 }

@@ -707,9 +707,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadPopulationCount
+        m_MethodName: ReadDecayRate
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -722,9 +722,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadPopulationCount
+        m_MethodName: ReadDecayRate
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170112749}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -854,7 +854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mutation Factor
+  m_Text: Policy Layer Count
 --- !u!222 &170112752
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -934,7 +934,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 
 --- !u!222 &177974944
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1743,7 +1743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &465531082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1877,7 +1877,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512169530}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1903,7 +1903,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Population Count
+  m_Text: Decay Rate
 --- !u!222 &512169533
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1983,7 +1983,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 
 --- !u!222 &538832483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
         m_MethodName: ReadName
         m_Mode: 0
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726754452}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -2502,7 +2502,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900530122}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -2528,7 +2528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Threshhold
+  m_Text: Value Layer Count
 --- !u!222 &900530125
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3032,7 +3032,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
         m_MethodName: CreateNewSave
         m_Mode: 1
@@ -4050,7 +4050,7 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
         m_MethodName: ReadName
         m_Mode: 0
@@ -4065,7 +4065,7 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
         m_MethodName: ReadName
         m_Mode: 0
@@ -4277,7 +4277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: D
+  m_Text: 
 --- !u!222 &1476724788
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4381,9 +4381,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadMutationFactor
+        m_MethodName: ReadPolicyLayerCount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4396,9 +4396,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadMutationFactor
+        m_MethodName: ReadPolicyLayerCount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4552,9 +4552,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadLayerSize
+        m_MethodName: ReadValueLayerSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4567,9 +4567,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadLayerSize
+        m_MethodName: ReadValueLayerSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5338,9 +5338,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadMutaionThreshhold
+        m_MethodName: ReadValueLayerCount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5353,9 +5353,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadMutaionThreshhold
+        m_MethodName: ReadValueLayerCount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5733,8 +5733,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1847841467}
   - component: {fileID: 1847841466}
-  - component: {fileID: 1847841465}
   - component: {fileID: 1847841464}
+  - component: {fileID: 1847841468}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -5756,19 +5756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSafe: 0
   textField: {fileID: 337838977}
---- !u!114 &1847841465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847841463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b1bb07eaee0c14980a446ac84c416b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiInterface: {fileID: 0}
 --- !u!114 &1847841466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5796,6 +5783,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847841468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847841463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abda9ee4ece6b4419871c627d678e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiControl: {fileID: 0}
 --- !u!1 &1884753739
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,9 +6008,9 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadLayerCount
+        m_MethodName: ReadPolicyLayerSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6023,9 +6023,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847841465}
+      - m_Target: {fileID: 1847841468}
         m_TargetAssemblyTypeName: CreateNNSave, Assembly-CSharp
-        m_MethodName: ReadLayerCount
+        m_MethodName: ReadPolicyLayerSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6129,7 +6129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007319480}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -6155,7 +6155,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Layer Count
+  m_Text: Policy Layer Size
 --- !u!222 &2007319483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6315,7 +6315,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &2047701000
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6369,7 +6369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058320767}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -6395,7 +6395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Layer Size
+  m_Text: Value Layer Size
 --- !u!222 &2058320770
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6621,7 +6621,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 300
+  m_Text: 
 --- !u!222 &2128509041
 CanvasRenderer:
   m_ObjectHideFlags: 0

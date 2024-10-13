@@ -10,9 +10,4 @@ public class AITrainingDummy : Racket
         GetComponent<Rigidbody2D>().transform.position = new Vector3(GetComponent<Rigidbody2D>().transform.position.x,ball.position.y, 0);
     }
 
-    public override void NextNN()
-    {}
-
-    public override void HitBall()
-    {}
 }

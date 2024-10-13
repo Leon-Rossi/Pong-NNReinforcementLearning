@@ -1,101 +1,113 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CreateNNSave : MonoBehaviour
 {
-    public AIControl aiInterface;
+    public AIControl aiControl;
 
-    float mutationFactor;
-    float mutationThreshhold;
-    int populationCount;
+    private string saveName;
+    private bool sigmoid = false;
 
-    int layerCount;
-    int layerSize;
-    int inputCount = 6;
-    int outputCount = 1;
-
-    string saveName;
+    private float decayRate;
+    private float policyLearningRate = 0.000001f;
+    private int policyLayerCount;
+    private int policyLayerSize;
+    private int policyInputCount = 4;
+    private int policyOutputCount = 2;
+    
+    private float valueLearningRate = 0.00005f;
+    private int valueLayerCount;
+    private int valueLayerSize;
+    private int valueInputCount = 4;
+    private int valueOutputCount = 1;
 
     GameObject AIMenu;
 
     bool flag1 = false;
-    bool flag2 = false;
+    bool flag2 = true;
     bool flag3 = false;
     bool flag4 = false;
-    bool flag5 = false;  
+    bool flag5 = true;  
     bool flag6 = false;
+    bool flag7 = false;
+    bool flag8 = false;
+    bool flag9 = false;
 
     void Start()
     {
         AIMenu = GameObject.Find("AIMenu");
     }
 
-    public void ReadMutationFactor(string input)
+    public void ReadDecayRate(string input)
     {
-        mutationFactor = float.Parse(input);
+        decayRate = float.Parse(input);
         flag1 = true;
-        Debug.Log("Test");
     }
 
-    public void ReadMutaionThreshhold(string input)
+    public void ReadPolicyLearningRate(string input)
     {
-        mutationThreshhold = float.Parse(input);
+        policyLearningRate = float.Parse(input);
         flag2 = true;
-        Debug.Log("Test");
     }
 
-    public void ReadPopulationCount(string input)
+    public void ReadPolicyLayerCount(string input)
     {
-        populationCount = int.Parse(input);
+        policyLayerCount = int.Parse(input);
         flag3 = true;
-        Debug.Log("Test");
     }
 
-    public void ReadLayerCount(string input)
+    public void ReadPolicyLayerSize(string input)
     {
-        layerCount = int.Parse(input);
+        policyLayerSize = int.Parse(input);
         flag4 = true;
-        Debug.Log("Test");
     }
 
-    public void ReadLayerSize(string input)
+    public void ReadValueLearningRate(string input)
     {
-        layerSize = int.Parse(input);
+        valueLearningRate = float.Parse(input);
         flag5 = true;
-        Debug.Log("Test");
+    }
+
+    public void ReadValueLayerCount(string input)
+    {
+        valueLayerCount = int.Parse(input);
+        flag6 = true;
+    }
+
+    public void ReadValueLayerSize(string input)
+    {
+        valueLayerSize = int.Parse(input);
+        flag7 = true;
     }
 
     public void ReadName(string input)
     {
         saveName = input;
-        flag6 = true;
-        Debug.Log("Test");
+        flag8 = true;
+    }
+
+    public void ReadSigmoid(string input)
+    {
+        sigmoid = input == "true";
+        flag9 = true;
     }
 
     public void CreateNewSave()
     {
-        Debug.Log("Start");
-        Debug.Log(flag1);
-        Debug.Log(flag2);
-        Debug.Log(flag3);
-        Debug.Log(flag4);
-        Debug.Log(flag5);
-        Debug.Log(flag6);
-
-        if(flag1 & flag2 & flag3 & flag4 & flag5 & flag6)
+        if(flag1 & flag2 & flag3 & flag4 & flag5 & flag6 & flag7 & flag8) 
         {
-            Debug.Log("Test2");
-            aiInterface = GameObject.Find("GameMaster").GetComponent<AIControl>();
+            aiControl = GameObject.Find("GameMaster").GetComponent<AIControl>();
 
-            aiInterface.AISaves.Add(new AISave(mutationFactor, mutationThreshhold, populationCount, layerCount, layerSize, inputCount, outputCount, saveName));
+            aiControl.AISaves.Add(new AISave(saveName, decayRate, policyLearningRate, policyLayerCount, policyLayerSize, policyInputCount, policyOutputCount, valueLearningRate, valueLayerCount, valueLayerSize, valueInputCount, valueOutputCount, sigmoid));
             
             AIMenu.SetActive(true);
             GameObject.Find("CreateNNMenu").SetActive(false);
 
-            Debug.Log("Test");
+            aiControl.SaveFile();
 
-            aiInterface.SaveFile();
+            print("New NN Created!");
+        }
+        else{
+            print("l" + flag1 + flag2 + flag3 + flag4 + flag5 + flag6 + flag7 + flag8);
         }
     }
 }

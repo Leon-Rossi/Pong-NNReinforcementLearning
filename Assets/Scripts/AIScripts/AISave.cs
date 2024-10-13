@@ -1,104 +1,102 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System.Numerics;
 using System;
 using Newtonsoft.Json;
-using System.Runtime.InteropServices;
+using System.IO;
 
 [Serializable]
 public class AISave
 {
-    [JsonIgnore] GeneticAlgorithm learningAlgorithm;
     [JsonIgnore] AIControl aIControl;
+    [JsonIgnore] NeuralNetworkController neuralNetworkController;
 
     public string saveName;
-    public float mutationFactor;
-    public float mutationThreshhold;
-    public int populationCount;
+    public bool sigmoid = false;
 
-    public int layerCount;
-    public int layerSize;
-    public int inputCount;
-    public int outputCount;
+    public float decayRate;
+    public float policyLearningRate;
+    public int policyLayerCount;
+    public int policyLayerSize;
+    public int policyInputCount;
+    public int policyOutputCount;
+    
+    public float valueLearningRate;
+    public int valueLayerCount;
+    public int valueLayerSize;
+    public int valueInputCount;
+    public int valueOutputCount;
 
-    public int[] currentNN = new int[2];
+    public List<List<List<List<float>>>> policyNN = new List<List<List<List<float>>>>();
+    public List<List<List<List<float>>>> valueNN = new List<List<List<List<float>>>>();
 
-    public List<List<List<List<List<List<float>>>>>> allNeuralNetworks = new List<List<List<List<List<List<float>>>>>>();
-    public List<List<List<List<List<float>>>>> bestNeuralNetworks = new List<List<List<List<List<float>>>>>();
+    public List<List<List<List<List<float>>>>> oldPolicyNNs = new List<List<List<List<List<float>>>>>();
 
-    public AISave(float mutationFactorFloat, float mutationThreshholdFloat, int populationCountInt, int layerCountInt, int layerSizeInt, int inputCountInt, int outputCountInt, string NameString)
+    public AISave(string nameString, float decayRateInput, float policyLearningRateInput, int policyLayerCountInput, int policyLayerSizeInput, int policyInputCountInput, int policyOutputCountInput, float valueLearningRateInput, int valueLayerCountInput, int valueLayerSizeInput, int valueInputCountInput, int valueOutputCountInput, bool sigmoidInput)
     {
-        mutationFactor = mutationFactorFloat;
-        mutationThreshhold = mutationThreshholdFloat;
-        populationCount = populationCountInt;
-        layerSize = layerSizeInt;
-        layerCount = layerCountInt;
-        inputCount = inputCountInt;
-        outputCount = outputCountInt;
-        saveName = NameString;
+        
+        policyLearningRate = policyLearningRateInput;
+        policyLayerSize = policyLayerSizeInput;
+        policyLayerCount = policyLayerCountInput;
+        policyInputCount = policyInputCountInput;
+        policyOutputCount = policyOutputCountInput;
 
-        learningAlgorithm = GameObject.Find("GameMaster").GetComponent<GeneticAlgorithm>();
+        valueLearningRate = valueLearningRateInput;
+        valueLayerSize = valueLayerSizeInput;
+        valueLayerCount = valueLayerCountInput;
+        valueInputCount = valueInputCountInput;
+        valueOutputCount = valueOutputCountInput;
+
+        sigmoid = sigmoidInput;
+        decayRate = decayRateInput;
+        saveName = nameString;
+
         aIControl = GameObject.Find("GameMaster").GetComponent<AIControl>();
-        SetUpFirstGeneration();
+        neuralNetworkController = GameObject.Find("GameMaster").GetComponent<NeuralNetworkController>();
 
+        policyNN = neuralNetworkController.CreateNN(policyLayerCount, policyLayerSize, policyInputCount, policyOutputCount);
+        valueNN = neuralNetworkController.CreateNN(valueLayerCount, valueLayerSize, valueInputCount, valueOutputCount);
     }
 
-    public void SetUpFirstGeneration()
+    private void Awake()
     {
-        allNeuralNetworks.Add(new List<List<List<List<List<float>>>>>());
+        aIControl = GameObject.Find("GameMaster").GetComponent<AIControl>();
+        neuralNetworkController = GameObject.Find("GameMaster").GetComponent<NeuralNetworkController>();
+    }
 
-        foreach(int i in Enumerable.Range(1, populationCount))
+    public void AddCurrentPolicyToOldPolicyNNs()
+    {
+        oldPolicyNNs.Add(CreateSerializedCopy(policyNN));
+    }
+
+    // Deep Cloning Lists based on https://stackoverflow.com/questions/27208411/how-to-clone-multidimensional-array-without-reference-correctly
+    /// <summary>
+    /// This method clones all of the items and serializable properties of the current collection by 
+    /// serializing the current object to memory, then deserializing it as a new object. This will 
+    /// ensure that all references are cleaned up.
+    /// </summary>
+    /// <returns></returns>
+    /// <remarks></remarks>
+    public T CreateSerializedCopy<T>(T oRecordToCopy)
+    {
+        // Exceptions are handled by the caller
+
+        if (oRecordToCopy == null)
         {
-            allNeuralNetworks[0].Add(GameObject.Find("GameMaster").GetComponent<NeuralNetworkController>().CreateNN(layerCount, layerSize, inputCount, outputCount));
-        }
-    }
-
-    public void SetUpNextGeneration()
-    {
-        allNeuralNetworks[currentNN[0]] = learningAlgorithm.SortListByFitness(allNeuralNetworks[currentNN[0]]);
-        bestNeuralNetworks.Add(learningAlgorithm.CreateSerializedCopy<List<List<List<List<float>>>>>(allNeuralNetworks.Last().Last()));
-
-        allNeuralNetworks.Add(learningAlgorithm.CreateNewPopulation(populationCount, mutationFactor, mutationThreshhold, allNeuralNetworks.Last()));
-
-        allNeuralNetworks[allNeuralNetworks.Count()-2].Clear();
-        currentNN[0] = allNeuralNetworks.Count()-1;
-        currentNN[1] = 0;
-
-        Debug.Log("Current Gen nr.: " + currentNN[0]);
-    }
-
-    public int[] GiveNN()
-    {
-        return currentNN;
-    }
-
-    public int[] GiveNextNN()
-    {
-        if(currentNN[1] >= populationCount-1)
-        {
-            Debug.Log("Next Gen");
-            SetUpNextGeneration();
-            aIControl.SaveFile();
-        }
-        else
-        {
-            currentNN[1] += 1; 
+            return default(T);
         }
 
-        Debug.Log("Current Population nr.: " + currentNN[1]);
+        if (!oRecordToCopy.GetType().IsSerializable)
+        {
+            throw new ArgumentException(oRecordToCopy.GetType().ToString() + " is not serializable");
+        }
 
-        return currentNN;
-    }
+        var oFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-    public List<List<List<List<float>>>> GiveNNFromIndex(int[] index)
-    {
-        return allNeuralNetworks[index[0]][index[1]];
-    }
-
-    public void SetFitnessScore(int[] index, float fitnessScore)
-    {
-        allNeuralNetworks[index[0]][index[1]][0][0][0][1] = fitnessScore;
+        using (var oStream = new MemoryStream())
+        {
+            oFormatter.Serialize(oStream, oRecordToCopy);
+            oStream.Position = 0;
+            return (T)oFormatter.Deserialize(oStream);
+        }
     }
 }
