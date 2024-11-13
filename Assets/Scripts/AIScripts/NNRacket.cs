@@ -189,10 +189,11 @@ public class NNRacket : Racket
             saveTimer = 0;
         }
 
-        if(validationHits + validationMisses >= 10000)
+        if(validationHits + validationMisses >= 1000)
         {
             float accuracy = validationHits / (validationMisses + validationHits);
             print("validation: " + accuracy);
+            aiControl.AISaves[currentAISave].measurments.Add(accuracy);
             validationHits = 0;
             validationMisses = 0;
         }
@@ -220,13 +221,6 @@ public class NNRacket : Racket
             ballObject.transform.position.y/8 + 0.5f,
             ballObject.GetComponent<AITrainingBall>().ballRb.velocity.x / 20,
             ballObject.GetComponent<AITrainingBall>().ballRb.velocity.y / 5
-        };
-
-        output = new List<float>{
-            gameObject.transform.position.y/8 + +.5f,
-            ballObject.transform.position.y/8 + 0.5f,
-            Vector2.Distance(ballObject.transform.position, gameObject.transform.position)/20f,
-            ballObject.GetComponent<AITrainingBall>().ballRb.velocity.x / 20
         };
 
         if(displayDebugInfo)

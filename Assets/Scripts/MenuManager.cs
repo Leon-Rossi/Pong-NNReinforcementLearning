@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            GameObject.Find("GameMaster").GetComponent<AIControl>().SaveFile();
             Load("Menu");
         }
     }

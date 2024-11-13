@@ -29,6 +29,8 @@ public class AISave
     public List<List<List<List<float>>>> policyNN = new List<List<List<List<float>>>>();
     public List<List<List<List<float>>>> valueNN = new List<List<List<List<float>>>>();
 
+    public List<float> measurments = new List<float>();
+
     public List<List<List<List<List<float>>>>> oldPolicyNNs = new List<List<List<List<List<float>>>>>();
 
     public AISave(string nameString, float decayRateInput, float policyLearningRateInput, int policyLayerCountInput, int policyLayerSizeInput, int policyInputCountInput, int policyOutputCountInput, float valueLearningRateInput, int valueLayerCountInput, int valueLayerSizeInput, int valueInputCountInput, int valueOutputCountInput, bool sigmoidInput)

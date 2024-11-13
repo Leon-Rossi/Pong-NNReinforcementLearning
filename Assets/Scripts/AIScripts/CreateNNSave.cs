@@ -8,16 +8,16 @@ public class CreateNNSave : MonoBehaviour
     private bool sigmoid = false;
 
     private float decayRate;
-    private float policyLearningRate = 0.000001f;
+    private float policyLearningRate = 0.00001f;
     private int policyLayerCount;
     private int policyLayerSize;
-    private int policyInputCount = 4;
+    private int policyInputCount = 5;
     private int policyOutputCount = 2;
     
-    private float valueLearningRate = 0.00005f;
+    private float valueLearningRate = 0.0001f;
     private int valueLayerCount;
     private int valueLayerSize;
-    private int valueInputCount = 4;
+    private int valueInputCount = 5;
     private int valueOutputCount = 1;
 
     GameObject AIMenu;
