@@ -7,7 +7,15 @@ public class AITrainingDummy : Racket
     public Transform ball;
     protected override void Movement()
     {
-        GetComponent<Rigidbody2D>().transform.position = new Vector3(GetComponent<Rigidbody2D>().transform.position.x,ball.position.y, 0);
+        if (ball.position.y > transform.position.y)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1) * moveSpeed;
+        }
+
+        if (ball.position.y < transform.position.y)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1) * moveSpeed;
+        }
     }
 
 }

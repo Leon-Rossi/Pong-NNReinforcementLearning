@@ -57,6 +57,9 @@ public class NNRacket : Racket
     int batchsize = 100;
     int batchCount;
 
+    int gracePeriod = 0;
+    bool isInGracePeriod;
+
     void Awake()
     {
         aiControl = GameObject.Find("GameMaster").GetComponent<AIControl>();    
@@ -74,6 +77,9 @@ public class NNRacket : Racket
         lastBallPosition = ballObject.transform.position;
 
         displayDebugInfo = aiControl.displayDebugInfo;
+
+        isInGracePeriod = aiControl.AISaves[currentAISave].measurments.Count() == 0? true: false;
+
     }
 
     protected override void Movement()
@@ -144,8 +150,11 @@ public class NNRacket : Racket
 
         if(!skipOneFrameTraining)
         {
-            policyDerivatives.Add(neuralNetworkController.SetPartialDerivatives(policyNN, leftLastPolicyCalculation, false, lastAction, true));
-            policyDerivatives.LastOrDefault().LastOrDefault().LastOrDefault().Add((float)(policyLearningRate * (advantage/Math.Clamp(lastOutputProbability+0.01, 0, 1))));
+            if(!isInGracePeriod)
+            {
+                policyDerivatives.Add(neuralNetworkController.SetPartialDerivatives(policyNN, leftLastPolicyCalculation, false, lastAction, true));
+                policyDerivatives.LastOrDefault().LastOrDefault().LastOrDefault().Add((float)(policyLearningRate * (advantage/Math.Clamp(lastOutputProbability, 0, 1))));
+            }
 
             valueDerivatives.Add(neuralNetworkController.SetPartialDerivatives(valueNN, leftLastValueCalculation, false));
             valueDerivatives.LastOrDefault().LastOrDefault().LastOrDefault().Add(valueLearningRate * advantage);
@@ -173,6 +182,8 @@ public class NNRacket : Racket
                 print("Comparison: " + neuralNetworkController.RunNN(valueNN, new List<float>(){1, 1, 1, 1, 1,}, false)[0] + " " + runSave[0] + " " + runSave[1]);
             }
 
+
+
         }
 
         skipOneFrameTraining = false;
@@ -187,6 +198,12 @@ public class NNRacket : Racket
 
             aiControl.SaveFile();
             saveTimer = 0;
+        }
+
+        if(isInGracePeriod && validationHits + validationMisses > gracePeriod)
+        {
+            isInGracePeriod = false;
+            print("Grace Period over");
         }
 
         if(validationHits + validationMisses >= 1000)
@@ -220,12 +237,12 @@ public class NNRacket : Racket
             ballObject.transform.position.x/16 + 0.5f,
             ballObject.transform.position.y/8 + 0.5f,
             ballObject.GetComponent<AITrainingBall>().ballRb.velocity.x / 20,
-            ballObject.GetComponent<AITrainingBall>().ballRb.velocity.y / 5
+            ballObject.GetComponent<AITrainingBall>().ballRb.velocity.y / 20,
         };
 
         if(displayDebugInfo)
         {
-            print("new Inputs: "+ output[0] +" "+ output[1]+" "+ output[2]+" "+ output[3]);
+            print("new Inputs: "+ output[0] +" "+ output[1]+" "+ output[2]+" "+ output[3] + " " + output[4]);
         }
 
         return output;
